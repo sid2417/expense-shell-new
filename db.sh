@@ -15,7 +15,7 @@ then
     echo -e $R "Please Provide ROOT access.." $N  &>>$LOGFILE
     exit 2
 else    
-    echo -e $Y"You Have already SUDO access..."$N &>>$LOGFILE
+    echo -e $Y "You Have already SUDO access..." $N &>>$LOGFILE
 fi
 
 
@@ -29,7 +29,7 @@ VALIDATE()
     fi
 }
 
-dnf list install mysql-server
+dnf list installed mysql-server
 if [ $? -ne 0 ]
 then    
     dnf install mysql-server -y
