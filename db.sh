@@ -23,9 +23,9 @@ VALIDATE()
 {
     if [ $1 -ne 0 ]
     then 
-        echo -e $R "$2 FAILURE..." $N &>>$LOGFILE 
+        echo -e $R "$2 FAILURE..." $N 
     else
-        echo -e $G "$2 SUCCESS..." $N &>>$LOGFILE
+        echo -e $G "$2 SUCCESS..." $N
     fi
 }
 
@@ -33,16 +33,16 @@ dnf list installed mysql-server
 if [ $? -ne 0 ]
 then    
     dnf install mysql-server -y &>>$LOGFILE
-    VALIDATE $? "Installtion of mysql :" &>>$LOGFILE
+    VALIDATE $? "Installtion of mysql :" 
 else
-    echo -e $G "mysql server is installed already..." $N &>>$LOGFILE
+    echo -e $G "mysql server is installed already..." $N 
 fi
 
-systemctl enable mysqld 
-VALIDATE $? "mysql  enable :" &>>$LOGFILE
+systemctl enable mysqld &>>$LOGFILE
+VALIDATE $? "mysql  enable :" 
 
-systemctl start mysqld
-VALIDATE $? "mysql  starting :" &>>$LOGFILE
+systemctl start mysqld &>>$LOGFILE
+VALIDATE $? "mysql  starting :" 
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
-VALIDATE $? "mysql password setup :" &>>$LOGFILE
+mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+VALIDATE $? "mysql password setup :" 
