@@ -12,10 +12,10 @@ LOGFILE=/tmp/$SCRIPTNAME-$TIMESTAMP.log
 
 if [ $USERID -ne 0 ]
 then   
-    echo -e $R "Please Provide ROOT access.." $N  &>>$LOGFILE
+    echo -e $R "Please Provide ROOT access.." $N  
     exit 2
 else    
-    echo -e $Y "You Have already SUDO access..." $N &>>$LOGFILE
+    echo -e $Y "You Have already SUDO access..." $N 
 fi
 
 
