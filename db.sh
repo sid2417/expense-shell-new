@@ -12,10 +12,10 @@ LOGFILE=/tmp/$SCRIPTNAME-$TIMESTAMP.log
 
 if [ $USERID -ne 0 ]
 then   
-    echo -e $R "Please Provide ROOT access.." $N
+    echo -e $R "Please Provide ROOT access.." $N  &>>$LOGFILE
     exit 2
 else    
-    echo -e $G"You Have already SUDO access..."$N
+    echo -e $Y"You Have already SUDO access..."$N &>>$LOGFILE
 fi
 
 
@@ -23,9 +23,9 @@ VALIDATE()
 {
     if [ $1 -ne 0 ]
     then 
-        echo "$2 FAILURE..."
+        echo -e $R "$2 FAILURE..." $N &>>$LOGFILE 
     else
-        echo "$2 SUCCESS..."
+        echo -e $G "$2 SUCCESS..." $N &>>$LOGFILE
     fi
 }
 
@@ -33,16 +33,16 @@ dnf list install mysql-server
 if [ $? -ne 0 ]
 then    
     dnf install mysql-server -y
-    VALIDATE $? "Installtion of mysql :"
+    VALIDATE $? "Installtion of mysql :" &>>$LOGFILE
 else
-    echo "mysql server is installed already..."
+    echo -e $G "mysql server is installed already..." $N &>>$LOGFILE
 fi
 
 systemctl enable mysqld 
-VALIDATE $? "mysql  enable :"
+VALIDATE $? "mysql  enable :" &>>$LOGFILE
 
 systemctl start mysqld
-VALIDATE $? "mysql  starting :"
+VALIDATE $? "mysql  starting :" &>>$LOGFILE
 
 mysql_secure_installation --set-root-pass ExpenseApp@1
-VALIDATE $? "mysql password setup :"
+VALIDATE $? "mysql password setup :" &>>$LOGFILE
