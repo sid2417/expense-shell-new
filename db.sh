@@ -44,5 +44,5 @@ VALIDATE $? "mysql  enable :"
 systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "mysql  starting :" 
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+mysql_secure_installation --set-root-pass ExpenseApp@1 
 VALIDATE $? "mysql password setup :" 
