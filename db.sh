@@ -24,6 +24,7 @@ VALIDATE()
     if [ $1 -ne 0 ]
     then 
         echo -e $R "$2 FAILURE..." $N 
+        exit 1
     else
         echo -e $G "$2 SUCCESS..." $N
     fi
@@ -44,5 +45,5 @@ VALIDATE $? "mysql  enable :"
 systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "mysql  starting :" 
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 
+mysql_secure_installation --set-root-pass ExpenseApp@1  &>>$LOGFILE
 VALIDATE $? "mysql password setup :" 
