@@ -35,7 +35,7 @@ then
     dnf install mysql-server -y &>>$LOGFILE
     VALIDATE $? "mysql is installing  :: "
 else
-    echo "mysql-server is already installed in your server...SKIPPING..."
+    echo  -e $Y "mysql-server is already installed in your server...SKIPPING..." $N
 fi
 
 
@@ -59,7 +59,7 @@ then
     mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
     VALIDATE $? "mysql setting up password  ::"
 else
-    echo "MySQL Root password is already setup...$Y SKIPPING $N"
+    echo -e "MySQL Root password is already setup...$Y SKIPPING $N"
 fi
 #--------------------------------------------------------------
 
