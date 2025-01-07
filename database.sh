@@ -1,5 +1,8 @@
 
 
+echo "Please Enter Your DataBase Password ::"
+read -s DB_Password
+
 USERID=$(id -u)
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 TIMESTAMP=$(date +%F-%H-%M-%S)
@@ -52,16 +55,29 @@ VALIDATE $? "mysql is starting  :: "
 #--------------------------------------------------------------
 
 
-#--------------------------------------------------------------
-mysql -h db.happywithyogamoney.fun -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+# #--------------------------------------------------------------
+# mysql -h db.happywithyogamoney.fun -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+# if [ $? -ne 0 ]
+# then
+#     mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+#     VALIDATE $? "mysql setting up password  ::"
+# else
+#     echo -e "MySQL Root password is already setup...$Y SKIPPING $N"
+# fi
+# #--------------------------------------------------------------
+
+
+
+#---------------------HIDDING PASSWORD (pExpenseApp@1)---------------------------
+mysql -h db.happywithyogamoney.fun -uroot -p${DB_Password} -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+    mysql_secure_installation --set-root-pass ${DB_Password} &>>$LOGFILE
     VALIDATE $? "mysql setting up password  ::"
 else
     echo -e "MySQL Root password is already setup...$Y SKIPPING $N"
 fi
-#--------------------------------------------------------------
+#---------------------------------------------------------------------------------
 
 
 
